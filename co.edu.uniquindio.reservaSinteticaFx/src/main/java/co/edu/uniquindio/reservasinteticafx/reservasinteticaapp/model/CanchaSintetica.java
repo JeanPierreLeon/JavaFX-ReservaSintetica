@@ -1,36 +1,72 @@
 package co.edu.uniquindio.reservasinteticafx.reservasinteticaapp.model;
 
+import co.edu.uniquindio.reservasinteticafx.reservasinteticaapp.Builder.CanchaSinteticaBuilder;
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class CanchaSintetica {
-    ArrayList<Usuario> listaUsuarios = new ArrayList<>();
-    ArrayList<Reserva> listaReservas = new ArrayList<>();
-    ArrayList<Empleados> listaEmpleados = new ArrayList<>();
+   private List<Usuario> listaUsuarios = new ArrayList<>();
+   private List<Reserva> listaReservas = new ArrayList<>();
+   private List<Empleado> listaEmpleados = new ArrayList<>();
 
-    public CanchaSintetica() {
+    public static CanchaSinteticaBuilder builder(){
+        return new CanchaSinteticaBuilder();
+    }
+    public CanchaSintetica(List<Usuario> listaUsuarios, List<Reserva> listaReservas, List<Empleado> listaEmpleados) {
+        this.listaUsuarios = listaUsuarios;
+        this.listaReservas = listaReservas;
+        this.listaEmpleados = listaEmpleados;
     }
 
-    public ArrayList<Usuario> getListaUsuarios() {
+
+
+
+
+
+    public List<Usuario> getListaUsuarios() {
         return listaUsuarios;
     }
 
-    public void setListaUsuarios(ArrayList<Usuario> listaUsuarios) {
+    public void setListaUsuarios(List<Usuario> listaUsuarios) {
         this.listaUsuarios = listaUsuarios;
     }
 
-    public ArrayList<Reserva> getListaReservas() {
+    public List<Reserva> getListaReservas() {
         return listaReservas;
     }
 
-    public void setListaReservas(ArrayList<Reserva> listaReservas) {
+    public void setListaReservas(List<Reserva> listaReservas) {
         this.listaReservas = listaReservas;
     }
 
-    public ArrayList<Empleados> getListaEmpleados() {
+    public List<Empleado> getListaEmpleados() {
         return listaEmpleados;
     }
 
-    public void setListaEmpleados(ArrayList<Empleados> listaEmpleados) {
+    public void setListaEmpleados(List<Empleado> listaEmpleados) {
         this.listaEmpleados = listaEmpleados;
+    }
+
+    public boolean eliminarReservas(Reserva reservaEliminar) {
+        Reserva reservaEncontrado = obtenerReserva(reservaEliminar.getIdReserva());
+        if(reservaEncontrado != null){
+            getListaReservas().remove(reservaEncontrado);
+            return true;
+        }else{
+            return  false;
+        }
+    }
+
+    private Reserva obtenerReserva(String idReserva) {
+        Reserva reserva = null;
+        for (Reserva reserva1: getListaReservas()) {
+            if(reserva1.getIdReserva().equalsIgnoreCase(idReserva)){
+                reserva = reserva1;
+                break;
+            }
+        }
+
+        return reserva;
     }
 }

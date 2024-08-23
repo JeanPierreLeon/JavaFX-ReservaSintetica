@@ -1,6 +1,6 @@
 package co.edu.uniquindio.reservasinteticafx.reservasinteticaapp.model;
 
-public class Empleados {
+public class Empleado {
     private String idEmpleado;
     private String nombre;
     private String apellido;
@@ -8,7 +8,7 @@ public class Empleados {
     private int telefono;
     private String direccion;
 
-    public Empleados(String idEmpleado, String nombre, String apellido, String cargo, int telefono, String direccion) {
+    public Empleado(String idEmpleado, String nombre, String apellido, String cargo, int telefono, String direccion) {
         this.idEmpleado = idEmpleado;
         this.nombre = nombre;
         this.apellido = apellido;

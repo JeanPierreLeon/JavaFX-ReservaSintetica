@@ -1,36 +1,41 @@
 package co.edu.uniquindio.reservasinteticafx.reservasinteticaapp.model;
 
+import co.edu.uniquindio.reservasinteticafx.reservasinteticaapp.Builder.ReservaBuilder;
+
 public class Reserva {
-    private int idReserva;
-    private int idUsuarioAsociado;
+    private String idReserva;
+    private String idUsuarioAsociado;
     private String fecha;
     private String idCancha;
-    private String idFechaReserva;
-    private int PrecioReserva;
+    private String PrecioReserva;
 
 
-    public Reserva(int idReserva, int idUsuarioAsociado, String fecha, String idCancha, String idFechaReserva, int precioReserva) {
+    public Reserva(String idReserva, String idUsuarioAsociado, String fecha, String idCancha,  String PrecioReserva) {
         this.idReserva = idReserva;
         this.idUsuarioAsociado = idUsuarioAsociado;
         this.fecha = fecha;
         this.idCancha = idCancha;
-        this.idFechaReserva = idFechaReserva;
-        PrecioReserva = precioReserva;
+        this.PrecioReserva = PrecioReserva;
     }
 
-    public int getIdReserva() {
+    public static ReservaBuilder builder(){
+        return new ReservaBuilder();
+    }
+
+
+    public String getIdReserva() {
         return idReserva;
     }
 
-    public void setIdReserva(int idReserva) {
+    public void setIdReserva(String idReserva) {
         this.idReserva = idReserva;
     }
 
-    public int getIdUsuarioAsociado() {
+    public String getIdUsuarioAsociado() {
         return idUsuarioAsociado;
     }
 
-    public void setIdUsuarioAsociado(int idUsuarioAsociado) {
+    public void setIdUsuarioAsociado(String idUsuarioAsociado) {
         this.idUsuarioAsociado = idUsuarioAsociado;
     }
 
@@ -50,31 +55,22 @@ public class Reserva {
         this.idCancha = idCancha;
     }
 
-    public String getIdFechaReserva() {
-        return idFechaReserva;
-    }
-
-    public void setIdFechaReserva(String idFechaReserva) {
-        this.idFechaReserva = idFechaReserva;
-    }
-
-    public int getPrecioReserva() {
+    public String getPrecioReserva() {
         return PrecioReserva;
     }
 
-    public void setPrecioReserva(int precioReserva) {
-        PrecioReserva = precioReserva;
+    public void setPrecioReserva(String PrecioReserva) {
+        this.PrecioReserva = PrecioReserva;
     }
 
     @Override
     public String toString() {
         return "Reserva{" +
-                "idReserva=" + idReserva +
-                ", idUsuarioAsociado=" + idUsuarioAsociado +
+                "idReserva='" + idReserva + '\'' +
+                ", idUsuarioAsociado='" + idUsuarioAsociado + '\'' +
                 ", fecha='" + fecha + '\'' +
                 ", idCancha='" + idCancha + '\'' +
-                ", idFechaReserva='" + idFechaReserva + '\'' +
-                ", PrecioReserva=" + PrecioReserva +
+                ", PrecioReserva='" + PrecioReserva + '\'' +
                 '}';
     }
 }
