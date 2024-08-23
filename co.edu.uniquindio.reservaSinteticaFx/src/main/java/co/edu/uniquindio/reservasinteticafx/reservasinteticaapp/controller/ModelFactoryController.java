@@ -49,6 +49,14 @@ public class ModelFactoryController {
     public boolean eliminarReservas(Reserva reserva) {
         return canchaSintetica.eliminarReservas(reserva);
     }
+
+    public boolean crearReservas(Reserva reserva) {
+        return canchaSintetica.crearReserva(reserva);
+    }
+
+    public boolean actualizarReserva(Reserva reserva) {
+        return canchaSintetica.actualizarReserva(reserva);
+    }
     // CanchaSinteticaMapper mapper = CanchaSinteticaMapper.INSTANCE;
 
 

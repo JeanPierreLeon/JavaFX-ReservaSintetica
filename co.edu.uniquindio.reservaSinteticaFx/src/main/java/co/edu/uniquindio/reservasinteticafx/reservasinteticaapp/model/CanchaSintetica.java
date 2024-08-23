@@ -21,9 +21,6 @@ public class CanchaSintetica {
 
 
 
-
-
-
     public List<Usuario> getListaUsuarios() {
         return listaUsuarios;
     }
@@ -68,5 +65,26 @@ public class CanchaSintetica {
         }
 
         return reserva;
+    }
+
+    public boolean crearReserva(Reserva reserva) {
+        Reserva reservaEncontrada = obtenerReserva(reserva.getIdReserva());
+        if(reservaEncontrada == null){
+            getListaReservas().add(reserva);
+            return true;
+        }else{
+            return  false;
+        }
+    }
+
+    public boolean actualizarReserva(Reserva reserva) {
+        Reserva reservaEncontrada = obtenerReserva(reserva.getIdReserva());
+        if(reservaEncontrada != null){
+            getListaReservas().remove(reservaEncontrada);
+            getListaReservas().add(reserva);
+            return true;
+        }else{
+            return  false;
+        }
     }
 }

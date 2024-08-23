@@ -66,7 +66,6 @@ public class ReservasViewController {
         reservaController = new ReservaController();
         initTableReservas();
 
-
     }
 
     private void initTableReservas() {
@@ -106,12 +105,34 @@ public class ReservasViewController {
 
     @FXML
     void onActualizarReserva(ActionEvent event) {
-
+        if(validarFormularioReserva()){
+            Reserva reserva = construirDatosReserva();
+            if(reservaController.actualizarReserva(reserva)){
+                obtenerReserva();
+                mostrarMensaje("Notificación Reserva", "Reserva actualizada", "La Reserva se ha actualizado con éxito", Alert.AlertType.INFORMATION);
+                limpiarCamposReservas();
+            }else{
+                mostrarMensaje("Notificación Reserva", "Producto no actualizada", "La Reserva no se ha actualizado con éxito", Alert.AlertType.ERROR);
+            }
+        }else{
+            mostrarMensaje("Notificación Reserva", "Reserva no actualizada", "Los datos ingresados no son validos", Alert.AlertType.ERROR);
+        }
     }
 
     @FXML
     void onAgregarReserva(ActionEvent event) {
-
+        if(validarFormularioReserva()){
+            Reserva reserva = construirDatosReserva();
+            if(reservaController.CrearReserva(reserva)){
+                obtenerReserva();
+                mostrarMensaje("Notificación Reserva", "Reserva creada", "La Reserva se ha creado con éxito", Alert.AlertType.INFORMATION);
+                limpiarCamposReservas();
+            }else{
+                mostrarMensaje("Notificación Reserva", "Reserva no creada", "La Reserva no se ha creado con éxito", Alert.AlertType.ERROR);
+            }
+        }else{
+            mostrarMensaje("Notificación Reserva", "Reserva no creada", "Los datos ingresados no son validos", Alert.AlertType.ERROR);
+        }
     }
 
     @FXML

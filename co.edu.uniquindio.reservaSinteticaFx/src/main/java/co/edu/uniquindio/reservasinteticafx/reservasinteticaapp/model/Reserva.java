@@ -2,12 +2,15 @@ package co.edu.uniquindio.reservasinteticafx.reservasinteticaapp.model;
 
 import co.edu.uniquindio.reservasinteticafx.reservasinteticaapp.Builder.ReservaBuilder;
 
+import java.util.ArrayList;
+
 public class Reserva {
     private String idReserva;
     private String idUsuarioAsociado;
     private String fecha;
     private String idCancha;
     private String PrecioReserva;
+    ArrayList<Usuario> listaUsuariosAsociados = new ArrayList<Usuario>();
 
 
     public Reserva(String idReserva, String idUsuarioAsociado, String fecha, String idCancha,  String PrecioReserva) {
@@ -63,6 +66,13 @@ public class Reserva {
         this.PrecioReserva = PrecioReserva;
     }
 
+    public ArrayList<Usuario> getListaUsuariosAsociados() {
+        return listaUsuariosAsociados;
+    }
+
+    public void setListaUsuariosAsociados(ArrayList<Usuario> listaUsuariosAsociados) {
+        this.listaUsuariosAsociados = listaUsuariosAsociados;
+    }
     @Override
     public String toString() {
         return "Reserva{" +
@@ -73,4 +83,6 @@ public class Reserva {
                 ", PrecioReserva='" + PrecioReserva + '\'' +
                 '}';
     }
+
+
 }

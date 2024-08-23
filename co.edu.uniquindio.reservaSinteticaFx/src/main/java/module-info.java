@@ -9,4 +9,5 @@ module co.edu.uniquindio.reservasinteticafx.reservasinteticaapp {
     exports co.edu.uniquindio.reservasinteticafx.reservasinteticaapp;
     opens co.edu.uniquindio.reservasinteticafx.reservasinteticaapp.viewController to javafx.fxml;
     exports co.edu.uniquindio.reservasinteticafx.reservasinteticaapp.viewController;
+
 }

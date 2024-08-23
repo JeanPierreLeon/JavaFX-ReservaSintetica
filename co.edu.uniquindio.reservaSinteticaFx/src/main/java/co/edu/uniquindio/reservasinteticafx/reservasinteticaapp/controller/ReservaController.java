@@ -20,4 +20,12 @@ public class ReservaController {
     public boolean eliminarReserva(Reserva reserva) {
         return modelFactoryController.eliminarReservas(reserva);
     }
+
+    public boolean CrearReserva(Reserva reserva) {
+        return modelFactoryController.crearReservas(reserva);
+    }
+
+    public boolean actualizarReserva(Reserva reserva) {
+        return modelFactoryController.actualizarReserva(reserva);
+    }
 }
