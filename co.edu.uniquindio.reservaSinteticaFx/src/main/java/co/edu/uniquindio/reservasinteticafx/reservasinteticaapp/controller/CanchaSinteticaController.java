@@ -6,7 +6,7 @@ public class CanchaSinteticaController  {
     ModelFactoryController modelFactoryController;
 
     public CanchaSinteticaController() {
-
+        System.out.println("Llamando al singleton desde CanchaSinteticaServiceController");
         modelFactoryController = ModelFactoryController.getInstance();
 
     }

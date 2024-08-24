@@ -17,6 +17,10 @@ public class Empleado {
         this.direccion = direccion;
     }
 
+    public Empleado() {
+
+    }
+
     public String getIdEmpleado() {
         return idEmpleado;
     }

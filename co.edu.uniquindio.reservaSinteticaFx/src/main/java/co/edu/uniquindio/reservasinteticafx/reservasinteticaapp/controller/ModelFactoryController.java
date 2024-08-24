@@ -1,63 +1,99 @@
 package co.edu.uniquindio.reservasinteticafx.reservasinteticaapp.controller;
 
-import co.edu.uniquindio.reservasinteticafx.reservasinteticaapp.Builder.CanchaSinteticaBuilder;
-import co.edu.uniquindio.reservasinteticafx.reservasinteticaapp.Builder.ReservaBuilder;
+
+import co.edu.uniquindio.reservasinteticafx.reservasinteticaapp.controller.service.IModelFactoryService;
+import co.edu.uniquindio.reservasinteticafx.reservasinteticaapp.exceptions.ReservaException;
+import co.edu.uniquindio.reservasinteticafx.reservasinteticaapp.mapping.dto.ReservaDto;
+import co.edu.uniquindio.reservasinteticafx.reservasinteticaapp.mapping.mappers.CanchaSinteticaMapper;
 import co.edu.uniquindio.reservasinteticafx.reservasinteticaapp.model.CanchaSintetica;
 import co.edu.uniquindio.reservasinteticafx.reservasinteticaapp.model.Reserva;
-import org.mapstruct.ap.shaded.freemarker.ext.util.ModelFactory;
+import co.edu.uniquindio.reservasinteticafx.reservasinteticaapp.utils.CanchaSinteticaUtils;
 
 import java.util.List;
 
-public class ModelFactoryController {
-    private static ModelFactoryController modelFactoryController;
-    private CanchaSintetica canchaSintetica = CanchaSintetica.builder().build();
+public class ModelFactoryController implements IModelFactoryService {
+    CanchaSintetica canchaSintetica;
+    CanchaSinteticaMapper mapper = CanchaSinteticaMapper.INSTANCE;
 
-    private ModelFactoryController(){
-        inicializarDatos();
+
+
+    //------------------------------  Singleton ------------------------------------------------
+    // Clase estatica oculta. Tan solo se instanciara el singleton una vez
+    private static class SingletonHolder {
+        private final static ModelFactoryController eINSTANCE = new ModelFactoryController();
     }
 
+    // Método para obtener la instancia de nuestra clase
     public static ModelFactoryController getInstance() {
-        if (modelFactoryController == null){
-            modelFactoryController = new ModelFactoryController();
+        return SingletonHolder.eINSTANCE;
+    }
+
+    public ModelFactoryController() {
+        System.out.println("invocación clase singleton");
+        cargarDatosBase();
+    }
+
+    private void cargarDatosBase() {
+        canchaSintetica = CanchaSinteticaUtils.inicializarDatos();
+    }
+
+    public CanchaSintetica getCanchaSintetica() {
+        return canchaSintetica;
+    }
+
+    public void setCanchaSintetica(CanchaSintetica canchaSintetica) {
+        this.canchaSintetica = canchaSintetica;
+    }
+
+
+    @Override
+    public List<ReservaDto> obtenerReservas() {
+        return  mapper.getEmpleadosDto(canchaSintetica.getListaReservas());
+    }
+
+
+
+    @Override
+    public boolean agregarReserva(ReservaDto reservaDto) {
+        try{
+            if(!canchaSintetica.verificarReservaExistente(reservaDto.idReserva())) {
+                Reserva reserva = mapper.empleadoDtoToEmpleado(reservaDto);
+                getCanchaSintetica().agregarReserva(reserva);
+            }
+            return true;
+        }catch (ReservaException e){
+            e.getMessage();
+            return false;
         }
-        return modelFactoryController;
+    }
+
+    @Override
+    public boolean eliminarReserva(String idReserva) {
+        boolean flagExiste = false;
+        try {
+            flagExiste = getCanchaSintetica().eliminarReserva(idReserva);
+        } catch (ReservaException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return flagExiste;
+    }
+
+    @Override
+    public boolean actualizarReserva(String idReservaActual, ReservaDto reservaDto) {
+        try {
+            Reserva reserva = mapper.empleadoDtoToEmpleado(reservaDto);
+            getCanchaSintetica().actualizarReserva(idReservaActual, reserva);
+            return true;
+        } catch (ReservaException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
 
 
-    private void inicializarDatos() {
-        /*Creacion de Reservas*/
 
-        Reserva reserva1 = Reserva.builder()
-                .idReserva("1")
-                .idUsuarioAsociado("1")
-                .fecha("24/08/2024 7:00 PM")
-                .idCancha("Cancha 1")
-                .PrecioReserva("50.000")
-                .build();
-
-
-        canchaSintetica.getListaReservas().add(reserva1);
-
-    }
-
-
-    public List<Reserva> obtenerReservas() {
-        return canchaSintetica.getListaReservas();
-    }
-
-    public boolean eliminarReservas(Reserva reserva) {
-        return canchaSintetica.eliminarReservas(reserva);
-    }
-
-    public boolean crearReservas(Reserva reserva) {
-        return canchaSintetica.crearReserva(reserva);
-    }
-
-    public boolean actualizarReserva(Reserva reserva) {
-        return canchaSintetica.actualizarReserva(reserva);
-    }
-    // CanchaSinteticaMapper mapper = CanchaSinteticaMapper.INSTANCE;
 
 
 

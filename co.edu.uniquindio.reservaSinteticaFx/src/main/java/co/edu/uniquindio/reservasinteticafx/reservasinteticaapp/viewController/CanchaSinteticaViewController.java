@@ -1,5 +1,7 @@
 package co.edu.uniquindio.reservasinteticafx.reservasinteticaapp.viewController;
 
-public class CanchaSinteticaViewController {
+import co.edu.uniquindio.reservasinteticafx.reservasinteticaapp.controller.service.ICanchaSinteticaService;
 
+public class CanchaSinteticaViewController {
+    ICanchaSinteticaService canchaSinteticaService;
 }

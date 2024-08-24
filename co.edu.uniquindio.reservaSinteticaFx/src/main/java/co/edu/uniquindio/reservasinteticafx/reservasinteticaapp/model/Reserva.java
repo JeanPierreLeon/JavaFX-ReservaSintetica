@@ -1,6 +1,6 @@
 package co.edu.uniquindio.reservasinteticafx.reservasinteticaapp.model;
 
-import co.edu.uniquindio.reservasinteticafx.reservasinteticaapp.Builder.ReservaBuilder;
+
 
 import java.util.ArrayList;
 
@@ -21,9 +21,10 @@ public class Reserva {
         this.PrecioReserva = PrecioReserva;
     }
 
-    public static ReservaBuilder builder(){
-        return new ReservaBuilder();
+    public Reserva() {
+
     }
+
 
 
     public String getIdReserva() {
